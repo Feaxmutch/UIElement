@@ -23,7 +23,7 @@
             char barPart = '#';
             float maxPresent = 100;
             present = Math.Min(maxPresent, present);
-            float barPartsCount = present * (length / maxPresent);
+            int barPartsCount = (int)(present * (length / maxPresent));
             string bar = string.Empty;
             ConsoleColor defaltForegroundColor = Console.ForegroundColor;
 
