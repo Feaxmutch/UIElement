@@ -22,28 +22,33 @@
             char emptyBarPart = '_';
             char barPart = '#';
             float maxPresent = 100;
-            float lastPartOfBar = present * (length / maxPresent);
+            present = Math.Min(maxPresent, present);
+            float barPartsCount = present * (length / maxPresent);
+            string bar = string.Empty;
             ConsoleColor defaltForegroundColor = Console.ForegroundColor;
 
             Console.ForegroundColor = frameColor;
             Console.SetCursorPosition(positionX, positionY);
             Console.Write(leftSideOfFrame);
-            Console.ForegroundColor = barColor;
 
-            DrawSymbols(1, lastPartOfBar, barPart);
-            DrawSymbols(lastPartOfBar, length, emptyBarPart);
+            Console.ForegroundColor = barColor;
+            bar = AppendSymbols(bar, (int)barPartsCount, barPart);
+            bar = AppendSymbols(bar, length - (int)barPartsCount, emptyBarPart);
+            Console.Write(bar);
 
             Console.ForegroundColor = frameColor;
             Console.Write(rightSideOfFrame);
             Console.ForegroundColor = defaltForegroundColor;
         }
 
-        private static void DrawSymbols(float startIteration, float lastIteration, char sumbol)
+        private static string AppendSymbols(string baseString, int appendsCount, char symbol)
         {
-            for (float i = startIteration; i <= lastIteration; i++)
+            for (float i = 0; i <= appendsCount; i++)
             {
-                Console.Write(sumbol);
+                baseString += symbol;
             }
+
+            return baseString;
         }
     }
 }
